@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+# some series of steps before tests are run OR deployed
+before_install:
+  - docker build -t prathammodi/docker-complete -f Dockerfile.dev . # build docker image
+
+# series of commands that need to be executed to run our test suite
+script:
+  - docker run -e CI=true prathammodi/docker-complete npm run test
