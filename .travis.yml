@@ -10,3 +10,16 @@ before_install:
 # series of commands that need to be executed to run our test suite
 script:
   - docker run -e CI=true prathammodi/docker-complete npm run test
+
+# deploy to AWS
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "docker-complete"
+  env: "Docker-complete-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-582058027444"
+  bucket_path: "docker-complete"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
